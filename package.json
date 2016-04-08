@@ -1,0 +1,15 @@
+{
+  "name": "rails-es6-sandbox",
+  "version": "1.0.0",
+  "description": "== README",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "browserify-incremental": "^3.1.1"
+  }
+}
