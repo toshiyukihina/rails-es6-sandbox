@@ -3,7 +3,9 @@ const React = require('react');
 const CommentForm = React.createClass({
   render: function() {
     return (
-      <div>CommentForm</div>
+      <div className="commentForm">
+        CommentForm
+      </div>
     );
   }
 });
