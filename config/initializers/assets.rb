@@ -10,4 +10,7 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.browserify_rails.commandline_options = '-t babelify -t reactify'
+Rails.application.config.browserify_rails.commandline_options = [
+  '-t babelify',
+  '-t reactify --extension=".js.jsx"'
+]
