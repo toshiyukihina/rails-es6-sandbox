@@ -1,6 +1,6 @@
 import Hello from './hello';
 
 jQuery($ => {
-  let hello = new Hello();
+  const hello = new Hello();
   $('#content').text(hello.world());
 });
