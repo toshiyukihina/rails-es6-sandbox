@@ -3,15 +3,61 @@ const CommentList = require('./comment_list');
 const CommentForm = require('./comment_form');
 
 const CommentBox = React.createClass({
+  
+  loadCommentsFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  handleCommentSubmit: function(comment) {
+    const comments = this.state.data;
+    comment.id = Date.now();
+    const newComments = comments.concat([comment]);
+    this.setState(newComments);
+    
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState(comments);
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  getInitialState: function() {
+    return {data: []};
+  },
+
+  componentDidMount: function() {
+    this.loadCommentsFromServer();
+    setInterval(this.loadCommentsFromServer, this.props.pollingInterval);
+  },
+  
   render: function() {
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList data={this.props.data} />
-        <CommentForm />
+        <CommentList data={this.state.data} />
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
   }
+  
 });
 
 module.exports = CommentBox;
