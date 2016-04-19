@@ -1,6 +1,6 @@
-var React = require('react');
+const React = require('react');
 
-var Hello = React.createClass({
+const Hello = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired
   }, 
